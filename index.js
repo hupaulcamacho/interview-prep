@@ -123,11 +123,13 @@ function syncMLSRecordToListing(mlsRecordId) {
 }
 
 function getOffersWithinPriceRange (min, max) {
+    // mainly for search filters
     return offers.find({ amount: { $between: [min, max] } });
 }
 
 function getListingWithMostOffers(listings, offers) {
     // access the listings database
+    // advertising highly bidded properties
     let listingsArr = listings.data
     let maxOffersListingId = 0
     let maxOffersAmount = 0
@@ -148,6 +150,12 @@ function getListingWithMostOffers(listings, offers) {
 
 function getOffersByListingId (listingId) {
     return offers.find({ listingId: listingId })
+}
+
+function getListingsByStatus (listingStatus) {
+    // can input any of the 4 available statuses to find specific listings
+    // mainly for search filters
+    return listings.find({ status: listingStatus })
 }
 
 function getMlsRecord(id) {
